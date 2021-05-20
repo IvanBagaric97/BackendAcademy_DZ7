@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    {% include "index.html.twig" %}
+
+    <br>
+
+    <form action="/process" method="post" enctype="multipart/form-data">
+        <table style="width: 100%; table-layout: fixed; border: 2px solid black;">
+            <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Year</th>
+                <th>Duration</th>
+                <th>Headline</th>
+                <th>Add</th>
+            </tr>
+            <tr>
+                <td style="text-align: center">
+                    <input type="text" name="title">
+                </td>
+                <td style="text-align: center">
+                    <select name="genre">
+                        {% if genres | length < 1 %}
+                            <p>No genres in database!</p>
+                        {% else %}
+                            {% for g in genres %}
+                                <div>
+                                    <option value="{{ g.name }}">{{ g.name }}</option>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+                </td>
+                <td style="text-align: center">
+                    <select name="genre">
+                        {% if genres | length < 1 %}
+                            <p>No genres in database!</p>
+                        {% else %}
+                            {% for y in years %}
+                                <div>
+                                    <option value="{{ y }}">{{ y }}</option>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </select>
+                </td>
+                <td style="text-align: center">
+                    <input type="number" name="duration">
+                </td>
+                <td style="text-align: center">
+                    <input type="file" name="file">
+                </td>
+                <td style="text-align: center">
+                    <input type="submit" name="submit" value="Add Movie">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+{% endblock %}
